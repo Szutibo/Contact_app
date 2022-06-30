@@ -1,0 +1,163 @@
+h2 {
+    font-family: 'Glysa';
+    letter-spacing: 0%;
+    font-size: 1.5rem;
+    width: 100%;
+    margin: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: fit-content;
+}
+
+.modal-bg {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000040;
+}
+
+.modal-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin: 0 auto;
+    max-width: 20.75rem;
+    height: fit-content;
+    max-height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #141414;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    letter-spacing: 1%;
+}
+
+.picture {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+}
+
+.picture-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    min-width: 100%;
+    height: fit-content;
+    margin-bottom: 1rem;
+}
+
+.add-picture {
+    margin-left: 2rem;
+    background-color: #2D2D2D;
+    width: 8rem;
+    height: 2.5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 0 0 0 .75rem;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-picture span {
+    margin-left: 0.5rem;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+}
+
+.input-container span {
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.input-container input {
+    box-sizing: border-box;
+    padding: 8px 12px;
+    height: 2.5rem;
+    background-color: #1E1E1E;
+    border: 1px solid #282828;
+    border-radius: 0.5rem;
+    margin: 0.25rem 0 1rem 0;
+    cursor: pointer;
+    color: #fff;
+}
+
+.picture-container p {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #2D2D2D;
+    font-size: 1.35rem;
+    margin-left: 0.5rem;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.button-container button {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    font-family: 'Lexend Deca';
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.done-button {
+    background: #262626;
+    border-radius: 8px;
+    width: 68px;
+    height: 40px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-button {
+    width: 46px;
+    height: 18px;
+    background-color: inherit;
+    border: none;
+    color: #fff;
+    padding-top: 0.75rem;
+    cursor: pointer;
+}
+
+.add-picture:hover,
+.done-button:hover {
+    background-color: #232323;
+}
+
+.input-container input:focus {
+    background-color: #414141;
+}

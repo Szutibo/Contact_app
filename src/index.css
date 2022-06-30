@@ -5,9 +5,50 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  letter-spacing: 1%;
+  font-family: 'Lexend Deca';
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --bg: #141414;
+  --bg-settings: #1E1E1E;
+  --border: 2px solid #282828;
+  --text-color-dark-theme: #FFFFFF;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Glysa';
+  src: url('../public//fonts/Glysa.otf');
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('../public/fonts/LexendDeca-VariableFont_wght.ttf');
 }

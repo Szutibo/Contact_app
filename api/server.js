@@ -35,7 +35,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
-// Delete contact
+// Delete contact by id
 router.delete('/:id', async (req, res) => {
     try {
         let result = await db.delete(req.params.id);

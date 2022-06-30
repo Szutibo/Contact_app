@@ -1,0 +1,107 @@
+.container {
+    background-color: #141414;
+    height: 100vh;
+    color: var(--text-color-dark-theme);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+.upper-placeholder-div {
+    width: 20%;
+    height: 15%;
+}
+
+.lower-placeholder-div {
+    width: 20%;
+}
+
+.first-row-middle {
+    height: 15%;
+    width: 58%;
+    border-right: var(--border);
+    border-left: var(--border);
+}
+
+.main {
+    width: 58%;
+    display: flex;
+    border-left: var(--border);
+    border-right: var(--border);
+}
+
+.nav-container {
+    width: 100%;
+}
+
+.body {
+    min-height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row-box {
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row {
+    width: 100%;
+    margin-left: 1rem;
+    display: flex;
+    padding: 1rem 0 1rem 0;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.one-contact {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.one-contact-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+}
+
+.one-contact-info {
+    margin-left: 1.5rem;
+}
+
+.one-contact-icons-container {
+    display: none;
+    flex-wrap: wrap;
+    margin-right: 2rem;
+}
+
+.one-contact-icons-container li, .dropdown-container {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.row:hover .one-contact-icons-container {
+    display: flex;
+}
+
+.dropdown-container:hover {
+    background-color: #232323;
+}
+
+.dropdown-container:active {
+    background-color: #1E1E1E;
+}

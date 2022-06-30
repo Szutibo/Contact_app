@@ -34,14 +34,15 @@ db.one = (id) => {
 
 // Create new contact
 db.create = (body) => {
-    let values = {name: body.name, img: body.img, phone: body.phone, email: body.email};
+    let values = { name: body.name, img: body.img, phone: body.phone, email: body.email };
+    console.log('db.js' ,values);
 
     return new Promise((resolve, reject) => {
         pool.query('INSERT INTO data SET ?', values, (err) => {
             if (err) {
                 return reject(err);
             }
-            return resolve({result: 'Create successful!'});
+            return resolve({ result: 'Create successful!' });
         })
     });
 }
@@ -49,11 +50,11 @@ db.create = (body) => {
 // Delete contact by id
 db.delete = (id) => {
     return new Promise((resolve, reject) => {
-        pool.query('DELETE FROM data WHERE id = ?' , [id], (err) => {
+        pool.query('DELETE FROM data WHERE id = ?', [id], (err) => {
             if (err) {
                 return reject(err);
             }
-            return resolve({result: 'Delete successful!'});
+            return resolve({ result: 'Delete successful!' });
         })
     });
 }
@@ -61,20 +62,38 @@ db.delete = (id) => {
 // Update contact
 db.update = (body) => {
     return new Promise((resolve, reject) => {
-        pool.query('UPDATE data SET name = ?, img = ?, phone = ?, email = ? WHERE id = ?',
-        [
-            body.name,
-            body.img,
-            body.phone,
-            body.email,
-            body.id
-        ], (err) => {
+        let querry = 'UPDATE data SET ';
+        let values = [];
+        if (typeof (body.name) != "undefined") {
+            querry += 'name = ?, '
+            values.push(body.name);
+        }
+
+        if (typeof (body.img) != "undefined") {
+            querry += 'img = ?, '
+            values.push(body.img);
+        }
+
+        if (typeof (body.phone) != "undefined") {
+            querry += 'phone = ?, '
+            values.push(body.phone);
+        }
+
+        if (typeof (body.email) != "undefined") {
+            querry += 'email = ? '
+            values.push(body.email);
+        }
+        querry += ' WHERE id = ?';
+
+        values.push(parseInt(body.id));
+
+        pool.query(querry, values, (err) => {
             if (err) {
                 return reject(err);
             }
-            return resolve({result: 'Sikeres törlés!'});
-        })
-    });
+            return resolve({ result: 'Update successful!' });
+        });
+    })
 }
 
 module.exports = db;
