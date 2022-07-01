@@ -1,6 +1,6 @@
 .container {
     background-color: #141414;
-    height: 100vh;
+    height: 120vh;
     color: var(--text-color-dark-theme);
     width: 100%;
     display: flex;
@@ -10,12 +10,12 @@
 }
 
 .upper-placeholder-div {
-    width: 20%;
+    max-width: 20%;
     height: 15%;
 }
 
 .lower-placeholder-div {
-    width: 20%;
+    max-width: 20%;
 }
 
 .first-row-middle {
@@ -23,6 +23,7 @@
     width: 58%;
     border-right: var(--border);
     border-left: var(--border);
+    transition: 500ms;
 }
 
 .main {
@@ -30,14 +31,19 @@
     display: flex;
     border-left: var(--border);
     border-right: var(--border);
+    transition: 500ms;
 }
 
 .nav-container {
     width: 100%;
+    min-height: fit-content;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    padding: 0;
 }
 
 .body {
-    min-height: 70%;
+    min-height: 75%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -81,7 +87,8 @@
     margin-right: 2rem;
 }
 
-.one-contact-icons-container li, .dropdown-container {
+.one-contact-icons-container li,
+.dropdown-container {
     width: 2.5rem;
     height: 2.5rem;
     display: flex;
@@ -92,6 +99,7 @@
 
 .dropdown-container {
     position: relative;
+    cursor: pointer;
 }
 
 .row:hover .one-contact-icons-container {
@@ -104,4 +112,69 @@
 
 .dropdown-container:active {
     background-color: #1E1E1E;
+}
+
+@media(max-width: 768px) {
+
+    .first-row-middle,
+    .main {
+        min-width: 75%;
+        transition: 500ms;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .first-row-middle,
+    .main {
+        min-width: 80%;
+        transition: 500ms;
+    }
+
+    .row {
+        margin-left: 0.5rem;
+    }
+
+    .one-contact-info {
+        margin-left: 0.75rem;
+    }
+
+    .one-contact-icons-container {
+        margin-right: 0.5rem;
+    }
+
+    .one-contact-icons-container li,
+    .dropdown-container {
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 6px;
+    }
+}
+
+@media(max-width: 450px) {
+    .first-row-middle,
+    .main {
+        min-width: 70%;
+        transition: 500ms;
+    }
+
+    .row {
+        margin-left: 0.25rem;
+    }
+
+    .one-contact-info {
+        margin-left: 0.5rem;
+        font-size: 12px;
+    }
+
+    .one-contact-icons-container {
+        margin-right: 0.125rem;
+    }
+
+    .one-contact-icons-container li,
+    .dropdown-container {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 4px;
+    }
 }

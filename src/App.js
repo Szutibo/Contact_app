@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getContacts, createContact, getContactById, updateContact } from './components/fetch/Fetch';
 
 // Components
 import Navbar from './components/navbar/Navbar';
 import { DropdownMenu, DropdownItem } from './components/dropdown/Dropdown';
 import Modal from './components/modal/Modal';
+import { getContacts, createContact } from './components/fetch/Fetch';
 
 // Icons
 import { MdDeleteOutline } from "react-icons/md";
@@ -16,25 +16,20 @@ import { RiHeadphoneLine } from "react-icons/ri";
 import { TbDots } from "react-icons/tb";
 
 function App() {
-  const [contactData, setContactData] = useState({
-    id: '',
-    name: '',
-    img: '',
-    phone: '',
-    email: '',
-  });
-  const [contacts, setContacts] = useState([]);
+  const [contactData, setContactData] = useState({}); // Gets data from the inputs in the Edit contact modal, data and getData alias
+  const [contacts, setContacts] = useState([]); // loadContacts' result (GET request)
+  const [contactToUpdate, setContactToUpdate] = useState({}); // Gets the contact by the clicked row's id
   const [httpErrors, setHttpErrors] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(-1);
   const [open, setOpen] = useState(false);
-  const [rowId, setRowId] = useState(null);
+
   const defBg = 'Default.png';
 
   const handleExpandClick = (i) => {
     setExpandedId(expandedId === i ? -1 : i);
   };
 
+  //Gets all the records from db
   const loadContacts = async () => {
     try {
       const requestedContactsArray = await getContacts();
@@ -44,9 +39,12 @@ function App() {
     }
   };
 
-  const check = (id) => {
+  // Gets one contact by id from contacts
+  const loadOneContact = (id) => {
     const contact = contacts.find((contact) => contact.id === id);
-    console.log(contact);
+    if (!open) {
+      setContactToUpdate(contact);
+    }
   }
 
   const newContact = async (data) => {
@@ -60,12 +58,21 @@ function App() {
     }
   }
 
+  /*const imgUpload = async (file) => {
+    try {
+      const result = await uploadFile(file, setUploadedFile);
+      if (result) {
+        console.log('sikeres feltöltés');
+      }
+    } catch(error) {
+      setHttpErrors(error.message);
+    }
+  }*/
+
   useEffect(() => {
     loadContacts();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   }, []);
+
 
 
   return (
@@ -74,26 +81,30 @@ function App() {
       <div className='first-row-middle main'></div>
       <div className='top-right-corner upper-placeholder-div'></div>
       <div className='nav-container'>
-        <Navbar newContact={newContact}/>
+        <Navbar
+          newContact={newContact}
+          defBg={defBg}
+          imgChecker={imgChecker}
+        />
       </div>
       <div className='bottom-left-corner lower-placeholder-div'></div>
       <div className='main body'>
-        {httpErrors && 
+        {httpErrors &&
           <p>{httpErrors}</p>
         }
         <div className='row-box'>
           {contacts.map((oneContact, i) => {
             return (
               <div
-              className='row'
-              key={oneContact.id}
-              onClick={() => {
-                setRowId(oneContact.id);
-                check(oneContact.id);
-              }}
+                className='row'
+                key={oneContact.id}
+                onClick={() => {
+                  loadOneContact(oneContact.id);
+                  loadContacts();
+                }}
               >
                 <div className='one-contact'>
-                  <div className='one-contact-img' style={{ backgroundImage: `url('/images/${defBg}')` }}></div>
+                  <div className='one-contact-img' style={{ backgroundImage: `url('/images/${imgChecker(oneContact.img, defBg)}')` }}></div>
                   <div className='one-contact-info'>
                     <div>{oneContact.name}</div>
                     <div>{oneContact.phone}</div>
@@ -116,7 +127,18 @@ function App() {
                   </li>
                 </ul>
                 {open &&
-                  <Modal title='Edit contact' closeModal={setOpen} getData={setContactData} data={contactData} contactId={1} />
+                  <Modal
+                    contactToUpdate={contactToUpdate}
+                    setContactToUpdate={setContactToUpdate}
+                    title='Edit contact'
+                    closeModal={setOpen}
+                    getData={setContactData}
+                    data={contactData}
+                    setHttpErrors={setHttpErrors}
+                    refreshContactList={loadContacts}
+                    defBg={defBg}
+                    imgChecker={imgChecker}
+                  />
                 }
               </div>
             )
@@ -126,6 +148,15 @@ function App() {
       <div className='bottom-right-corner lower-placeholder-div'></div>
     </div>
   );
+}
+
+// Checks if a record has an image property or not
+function imgChecker(img, defBg) {
+  if (img) {
+    return img;
+  } else {
+    return defBg;
+  }
 }
 
 export default App;

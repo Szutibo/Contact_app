@@ -35,7 +35,6 @@ db.one = (id) => {
 // Create new contact
 db.create = (body) => {
     let values = { name: body.name, img: body.img, phone: body.phone, email: body.email };
-    console.log('db.js' ,values);
 
     return new Promise((resolve, reject) => {
         pool.query('INSERT INTO data SET ?', values, (err) => {
@@ -62,32 +61,41 @@ db.delete = (id) => {
 // Update contact
 db.update = (body) => {
     return new Promise((resolve, reject) => {
-        let querry = 'UPDATE data SET ';
+        let query = 'UPDATE data SET ';
         let values = [];
-        if (typeof (body.name) != "undefined") {
-            querry += 'name = ?, '
+        if (typeof (body.name) != 'undefined') {
+            query += 'name = ?';
             values.push(body.name);
         }
 
-        if (typeof (body.img) != "undefined") {
-            querry += 'img = ?, '
+        if (typeof (body.img) != 'undefined') {
+            if (values.length >= 1) {
+                query += ',';
+            }
+            query += 'img = ?'
             values.push(body.img);
         }
 
-        if (typeof (body.phone) != "undefined") {
-            querry += 'phone = ?, '
+        if (typeof (body.phone) != 'undefined') {
+            if (values.length >= 1) {
+                query += ',';
+            }
+            query += 'phone = ?'
             values.push(body.phone);
         }
 
-        if (typeof (body.email) != "undefined") {
-            querry += 'email = ? '
+        if (typeof (body.email) != 'undefined') {
+            if (values.length >= 1) {
+                query += ',';
+            }
+            query += 'email = ?'
             values.push(body.email);
         }
-        querry += ' WHERE id = ?';
+        query += ' WHERE id = ?';
 
         values.push(parseInt(body.id));
 
-        pool.query(querry, values, (err) => {
+        pool.query(query, values, (err) => {
             if (err) {
                 return reject(err);
             }

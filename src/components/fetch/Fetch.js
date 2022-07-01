@@ -5,7 +5,6 @@ export const getContacts = async () => {
 
 export const createContact = async (contactData) => {
     const { name, img, phone, email } = contactData;
-    console.log('fetch.js' ,contactData);
     const createdContact = await fetch('http://localhost:3001/api/contactlist/create', {
         method: 'POST',
         mode: 'cors',
@@ -24,17 +23,6 @@ export const createContact = async (contactData) => {
     } else {
         throw new Error(
             `HTTP error occured: status ${createdContact.status}`
-        );
-    }
-};
-
-export const getContactById = async (id) => {
-    const oneContact = await fetch(`http://localhost:3001/api/contactlist/${id}`);
-    if (oneContact.status === 200) {
-        return oneContact.json();
-    } else {
-        throw new Error(
-            'ID does not exist!'
         );
     }
 };
@@ -58,8 +46,8 @@ export const deleteContactById = (id) => {
         });
 };
 
-export const updateContact = async (id, data) => {
-    const updatedContact = await fetch(`http://localhost:3001/api/contactlist/${id}`, {
+export const updateContact = async (data) => {
+    const updatedContact = await fetch(`http://localhost:3001/api/contactlist`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -75,3 +63,28 @@ export const updateContact = async (id, data) => {
         );
     }
 };
+
+export const uploadFile = async (file, func) => {
+    try {
+        const result = await fetch('http://localhost:3001/api/contactlist/upload', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-type': 'text/html'
+            }, body: {
+                contactImage: file,
+            }
+        });
+        console.log(file);
+        const fileName = result.data;
+
+        func({ fileName });
+        console.log('siker', fileName);
+    } catch (err) {
+        if (err.status === 500) {
+            console.log('Server error');
+        } else {
+            console.log('catch, else ág, fetch.js',err.message);
+        }
+    }
+}

@@ -16,7 +16,7 @@ const Navbar = (props) => {
   return (
     <nav className='navbar'>
       <div className='navbar-left-side'>
-        <a href="/"><AiOutlineArrowLeft /></a>
+        <p><AiOutlineArrowLeft /></p>
       </div>
       <div className='nav-main'>
         <h1>Contacts</h1>
@@ -33,7 +33,13 @@ const Navbar = (props) => {
               <span>Add new</span>
             </p>
             {open &&
-              <Modal newContact={props.newContact} title='Add contact' closeModal={setOpen}/>
+              <Modal
+                newContact={props.newContact}
+                title='Add contact'
+                closeModal={setOpen}
+                defBg={props.defBg}
+                imgChecker={props.imgChecker}
+              />
             }
           </li>
         </ul>
