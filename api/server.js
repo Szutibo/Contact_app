@@ -77,7 +77,7 @@ router.delete('/:id', async (req, res) => {
 // Upload image
 router.post('/upload', upload.single('contactImage'), (req, res) => {
     try {
-        res.status(200).send('OK');
+        res.status(200).send(req.body.name);
         console.log('sikeres upload, backend');
     } catch (err) {
         res.status(500).send({ error: err.message })

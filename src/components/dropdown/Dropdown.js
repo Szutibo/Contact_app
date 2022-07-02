@@ -17,7 +17,9 @@ export function DropdownItem(props) {
                 (props.openModal && props.openModal(true));
                 if (props.id) {
                     deleteContactById(props.id);
-                    props.refreshContactList();
+                    setTimeout(() => {
+                        props.refreshContactList();
+                    }, 500);
                 }
             }}
             className="dropdown-item"

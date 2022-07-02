@@ -3,8 +3,20 @@ export const getContacts = async () => {
     return everyContact.json();
 };
 
+export const getContactById = async (id) => {
+    const oneContact = await fetch(`http://localhost:3001/api/contactlist/${id}`);
+    if (oneContact.status === 200) {
+        return oneContact.json();
+    } else {
+        throw new Error(
+            'Server error!'
+        );
+    }
+};
+
 export const createContact = async (contactData) => {
     const { name, img, phone, email } = contactData;
+
     const createdContact = await fetch('http://localhost:3001/api/contactlist/create', {
         method: 'POST',
         mode: 'cors',
@@ -64,27 +76,29 @@ export const updateContact = async (data) => {
     }
 };
 
-export const uploadFile = async (file, func) => {
-    try {
-        const result = await fetch('http://localhost:3001/api/contactlist/upload', {
+export const uploadImage = async (image, errorHandler, initFile) => {
+    if (typeof (image) !== 'undefined') {
+        const formdata = new FormData();
+        formdata.append('contactImage', image);
+        formdata.append('name', image.name);
+        console.log(image);
+
+        fetch('http://localhost:3001/api/contactlist/upload', {
             method: 'POST',
             mode: 'cors',
-            headers: {
-                'Content-type': 'text/html'
-            }, body: {
-                contactImage: file,
+            body: formdata
+        }).then(response => {
+            if (!response.ok) {
+                initFile('');
+                throw new Error(
+                    `HTTP error occured: status ${response.status}`
+                )
             }
-        });
-        console.log(file);
-        const fileName = result.data;
-
-        func({ fileName });
-        console.log('siker', fileName);
-    } catch (err) {
-        if (err.status === 500) {
-            console.log('Server error');
-        } else {
-            console.log('catch, else ág, fetch.js',err.message);
-        }
+            initFile('');
+            return response;
+        }).catch((error) => {
+            errorHandler(error.message);
+        })
     }
+    return;
 }

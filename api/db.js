@@ -61,46 +61,48 @@ db.delete = (id) => {
 // Update contact
 db.update = (body) => {
     return new Promise((resolve, reject) => {
-        let query = 'UPDATE data SET ';
-        let values = [];
-        if (typeof (body.name) != 'undefined') {
-            query += 'name = ?';
-            values.push(body.name);
-        }
-
-        if (typeof (body.img) != 'undefined') {
-            if (values.length >= 1) {
-                query += ',';
+        if (body.id != 'undefined') {
+            let query = 'UPDATE data SET ';
+            let values = [];
+            if (typeof (body.name) != 'undefined' && body.name.length >= 5 && body.name.length <= 50) {
+                query += 'name = ?';
+                values.push(body.name);
             }
-            query += 'img = ?'
-            values.push(body.img);
-        }
 
-        if (typeof (body.phone) != 'undefined') {
-            if (values.length >= 1) {
-                query += ',';
+            if (typeof (body.img) != 'undefined') {
+                if (values.length >= 1) {
+                    query += ',';
+                }
+                query += 'img = ?'
+                values.push(body.img);
             }
-            query += 'phone = ?'
-            values.push(body.phone);
-        }
 
-        if (typeof (body.email) != 'undefined') {
-            if (values.length >= 1) {
-                query += ',';
+            if (typeof (body.phone) != 'undefined' && body.phone.length <= 15 && body.phone.length >= 5) {
+                if (values.length >= 1) {
+                    query += ',';
+                }
+                query += 'phone = ?'
+                values.push(body.phone);
             }
-            query += 'email = ?'
-            values.push(body.email);
-        }
-        query += ' WHERE id = ?';
 
-        values.push(parseInt(body.id));
-
-        pool.query(query, values, (err) => {
-            if (err) {
-                return reject(err);
+            if (typeof (body.email) != 'undefined' && body.email.length <= 35 && body.email.length >= 3) {
+                if (values.length >= 1) {
+                    query += ',';
+                }
+                query += 'email = ?'
+                values.push(body.email);
             }
-            return resolve({ result: 'Update successful!' });
-        });
+            query += ' WHERE id = ?';
+
+            values.push(parseInt(body.id));
+
+            pool.query(query, values, (err) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve({ result: 'Update successful!' });
+            });
+        }
     })
 }
 
