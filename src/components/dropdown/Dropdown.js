@@ -4,7 +4,7 @@ import { deleteContactById } from '../fetch/Fetch';
 export function DropdownMenu(props) {
 
     return (
-        <div className="dropdown">
+        <div className='dropdown'>
             {props.children}
         </div>
     )
@@ -22,7 +22,7 @@ export function DropdownItem(props) {
                     }, 500);
                 }
             }}
-            className="dropdown-item"
+            className='dropdown-item'
         >
             <span>{props.icon}</span>
             {props.children}

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Modal.css';
 
 // Icon
-import { GoPlus } from "react-icons/go";
-import { MdDeleteOutline } from "react-icons/md";
-import { FiRefreshCw } from "react-icons/fi";
+import { GoPlus } from 'react-icons/go';
+import { MdDeleteOutline } from 'react-icons/md';
+import { FiRefreshCw } from 'react-icons/fi';
 
 //Components
 import { updateContact, uploadImage } from '../fetch/Fetch';
@@ -110,7 +110,7 @@ function Modal(props, { setImages }) {
                             {<GoPlus />}
                             <span>Add picture</span>
                             <input
-                                type="file"
+                                type='file'
                                 onChange={(e) => {
                                     setFile(e.target.files[0]);
                                     onImageChange(e);
@@ -122,7 +122,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Name</span>
                         <input
-                            type="text"
+                            type='text'
                             onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
                             placeholder='Jamie Wright'
                         />
@@ -131,7 +131,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Phone number</span>
                         <input
-                            type="number"
+                            type='number'
                             onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
                             placeholder='+01 234 5678'
                         />
@@ -140,7 +140,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Email address</span>
                         <input
-                            type="text"
+                            type='text'
                             onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
                             placeholder='jamie.wright@mail.com'
                         />
@@ -176,7 +176,7 @@ function Modal(props, { setImages }) {
                             {<FiRefreshCw />}
                             <span>Add picture</span>
                             <input
-                                type="file"
+                                type='file'
                                 onChange={(e) => {
                                     setFile(e.target.files[0]);
                                     onImageChangeUpdate(e);
@@ -195,7 +195,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Name</span>
                         <input
-                            type="text"
+                            type='text'
                             onMouseLeave={() => dataPusher(props.contactToUpdate.name, 'name')}
                             onChange={(e) => props.setContactToUpdate({ ...props.contactToUpdate, name: e.target.value })}
                             placeholder={props.contactToUpdate.name}
@@ -205,7 +205,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Phone number</span>
                         <input
-                            type="number"
+                            type='number'
                             onMouseLeave={() => dataPusher(props.contactToUpdate.phone, 'phone')}
                             onChange={(e) => props.setContactToUpdate({ ...props.contactToUpdate, phone: e.target.value })}
                             placeholder={props.contactToUpdate.phone}
@@ -215,7 +215,7 @@ function Modal(props, { setImages }) {
                     <div className='input-container'>
                         <span>Email address</span>
                         <input
-                            type="text"
+                            type='text'
                             onMouseLeave={() => dataPusher(props.contactToUpdate.email, 'email')}
                             onChange={(e) => props.setContactToUpdate({ ...props.contactToUpdate, email: e.target.value })}
                             placeholder={props.contactToUpdate.email}

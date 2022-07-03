@@ -5,10 +5,10 @@ import './Navbar.css';
 import Modal from '../modal/Modal';
 
 // Icons
-import { IoSettingsOutline } from "react-icons/io5";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { TbBrightnessUp } from "react-icons/tb";
-import { GoPlus } from "react-icons/go";
+import { IoSettingsOutline } from 'react-icons/io5';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { TbBrightnessUp } from 'react-icons/tb';
+import { GoPlus } from 'react-icons/go';
 
 const Navbar = (props) => {
   const [open, setOpen] = useState(false);

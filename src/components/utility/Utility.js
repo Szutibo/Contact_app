@@ -77,7 +77,7 @@ export const updateButtonChecker = (requestBody, errorsArray, buttonFunc, classF
 };
 
 export function imgChecker(img, defBg) {
-    if (typeof(img) !== 'undefined') {
+    if (typeof (img) !== 'undefined') {
         return img;
     } else {
         return defBg;

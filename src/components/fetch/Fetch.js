@@ -1,10 +1,12 @@
+const port = 3001;
+
 export const getContacts = async () => {
-    const everyContact = await fetch('http://localhost:3001/api/contactlist');
+    const everyContact = await fetch(`http://localhost:${port}/api/contactlist`);
     return everyContact.json();
 };
 
 export const getContactById = async (id) => {
-    const oneContact = await fetch(`http://localhost:3001/api/contactlist/${id}`);
+    const oneContact = await fetch(`http://localhost:${port}/api/contactlist/${id}`);
     if (oneContact.status === 200) {
         return oneContact.json();
     } else {
@@ -17,7 +19,7 @@ export const getContactById = async (id) => {
 export const createContact = async (contactData) => {
     const { name, img, phone, email } = contactData;
 
-    const createdContact = await fetch('http://localhost:3001/api/contactlist/create', {
+    const createdContact = await fetch(`http://localhost:${port}/api/contactlist/create`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -40,7 +42,7 @@ export const createContact = async (contactData) => {
 };
 
 export const deleteContactById = (id) => {
-    fetch(`http://localhost:3001/api/contactlist/${id}`, {
+    fetch(`http://localhost:${port}/api/contactlist/${id}`, {
         method: 'DELETE',
         mode: 'cors',
         headers: {
@@ -83,7 +85,7 @@ export const uploadImage = async (image, errorHandler, initFile) => {
         formdata.append('name', image.name);
         console.log(image);
 
-        fetch('http://localhost:3001/api/contactlist/upload', {
+        fetch(`http://localhost:${port}/api/contactlist/upload`, {
             method: 'POST',
             mode: 'cors',
             body: formdata

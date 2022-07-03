@@ -17,7 +17,8 @@ h2 {
     width: 100%;
     min-height: 100%;
     height: auto;
-    background-color: rgba(0, 0, 0, 0.4);;
+    background-color: rgba(0, 0, 0, 0.4);
+    ;
 }
 
 .modal-container {
@@ -75,7 +76,7 @@ h2 {
     margin-left: 0.5rem;
 }
 
-input[type="file"] {
+input[type='file'] {
     position: fixed;
     right: 100%;
     bottom: 100%;
@@ -187,8 +188,8 @@ input[type="file"] {
 
 @media(max-width: 450px) {
     .modal-container {
-    max-width: 18rem;
-    height: fit-content;
+        max-width: 18rem;
+        height: fit-content;
     }
 
     .picture-container p {
