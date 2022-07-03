@@ -71,6 +71,7 @@ function Modal(props, { setImages }) {
         }
     }
 
+    // Hibát dob a kép feltöltés cancel-nél, contacttoupdate undefined
     const onImageChangeUpdate = (event, props) => {
         if (event.target.files && event.target.files[0]) {
             setImageUpd(URL.createObjectURL(event.target.files[0]));

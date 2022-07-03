@@ -24,12 +24,12 @@ function App() {
     phone: '',
     email: '',
   }); // Gets data from the inputs in the Edit contact modal, data and getData alias
-  const [contacts, setContacts] = useState([]); // loadContacts' result (GET request)
   const [contactToUpdate, setContactToUpdate] = useState({}); // Gets the contact by the clicked row's id
-  const [httpErrors, setHttpErrors] = useState(null); // HTTP errors get here
+  const [httpErrors, setHttpErrors] = useState(null); // HTTP errors get set here
+  const [contacts, setContacts] = useState([]); // loadContacts' result
   const [expandedId, setExpandedId] = useState(-1);
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const defBg = 'Default.png';
 
   const handleExpandClick = (i) => {
@@ -55,9 +55,7 @@ function App() {
   // Gets one contact by id from contacts
   const loadOneContact = (id) => {
     const contact = contacts.find((contact) => contact.id === id);
-    if (!open) {
-      setContactToUpdate(contact);
-    }
+    setContactToUpdate(contact);
   }
 
   const newContact = async (data) => {
