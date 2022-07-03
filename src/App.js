@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 
 // Components
@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownItem } from './components/dropdown/Dropdown';
 import Modal from './components/modal/Modal';
 import { getContacts, createContact } from './components/fetch/Fetch';
 import { imgChecker } from './components/utility/Utility';
+import { SkeletonItem } from './components/skeleton/Skeleton';
 
 // Icons
 import { MdDeleteOutline } from 'react-icons/md';
@@ -108,84 +109,52 @@ function App() {
               setHttpErrors('');
             }} className='http-error-container'>{httpErrors}</h2>
           }
-          {loading
-            ? <div className='skeleton-row'>
-              <div className='skeleton-one-contact'>
-                <div className='skeleton-img'></div>
-                <div>
-                  <div className='skeleton-item'></div>
-                  <div className='skeleton-item'></div>
-                </div>
-              </div>
-              <div className='skeleton-one-contact'>
-                <div className='skeleton-img'></div>
-                <div>
-                  <div className='skeleton-item'></div>
-                  <div className='skeleton-item'></div>
-                </div>
-              </div>
-              <div className='skeleton-one-contact'>
-                <div className='skeleton-img'></div>
-                <div>
-                  <div className='skeleton-item'></div>
-                  <div className='skeleton-item'></div>
-                </div>
-              </div>
-              <div className='skeleton-one-contact'>
-                <div className='skeleton-img'></div>
-                <div>
-                  <div className='skeleton-item'></div>
-                  <div className='skeleton-item'></div>
-                </div>
-              </div>
-              <div className='skeleton-one-contact'>
-                <div className='skeleton-img'></div>
-                <div>
-                  <div className='skeleton-item'></div>
-                  <div className='skeleton-item'></div>
-                </div>
-              </div>
-            </div>
-            : contacts.map((oneContact, i) => {
-              return (
-                <div
-                  className='row'
-                  key={oneContact.id}
-                  onClick={() => {
-                    loadOneContact(oneContact.id);
-                  }}
-                >
-                  <div className='one-contact'>
-                    <div className='one-contact-img' style={{ backgroundImage: `url('/images/${imgChecker(oneContact.img, defBg)}')` }}></div>
-                    <div className='one-contact-info'>
-                      <div>{oneContact.name}</div>
-                      <div>{oneContact.phone}</div>
-                    </div>
+          {contacts.map((oneContact, i) => {
+            return (
+              <Fragment key={oneContact.id}>
+                {loading
+                  ? <div className='skeleton-row'>
+                    <SkeletonItem />
                   </div>
-                  <ul className='one-contact-icons-container'>
-                    <li>{<BiBellOff />}</li>
-                    <li>{<RiHeadphoneLine />}</li>
-                    <li>
-                      <div
-                      className='dropdown-container' onClick={() => {
-                        handleExpandClick(i);
-                      }}
-                      >
-                        {<TbDots />}
-                        {expandedId === i &&
-                          <DropdownMenu>
-                            <DropdownItem openModal={setOpen} icon={<IoSettingsOutline />}
-                            >Edit</DropdownItem>
-                            <DropdownItem icon={<MdOutlineFavoriteBorder />}>Favourite</DropdownItem>
-                            <DropdownItem refreshContactList={loadContacts} id={oneContact.id} icon={<MdDeleteOutline />}>Remove</DropdownItem>
-                          </DropdownMenu>
-                        }
+                  : (<div
+                    className='row'
+                    onClick={() => {
+                      loadOneContact(oneContact.id);
+                    }}
+                  >
+                    <div className='one-contact'>
+                      <div className='one-contact-img' style={{ backgroundImage: `url('/images/${imgChecker(oneContact.img, defBg)}')` }}></div>
+                      <div className='one-contact-info'>
+                        <div>{oneContact.name}</div>
+                        <div>{oneContact.phone}</div>
                       </div>
-                    </li>
-                  </ul>
-                </div>
-              )
-            })}
+                    </div>
+                    <ul className='one-contact-icons-container'>
+                      <li>{<BiBellOff />}</li>
+                      <li>{<RiHeadphoneLine />}</li>
+                      <li>
+                        <div
+                          className='dropdown-container' onClick={() => {
+                            handleExpandClick(i);
+                          }}
+                        >
+                          {<TbDots />}
+                          {expandedId === i &&
+                            <DropdownMenu>
+                              <DropdownItem openModal={setOpen} icon={<IoSettingsOutline />}
+                              >Edit</DropdownItem>
+                              <DropdownItem icon={<MdOutlineFavoriteBorder />}>Favourite</DropdownItem>
+                              <DropdownItem refreshContactList={loadContacts} id={oneContact.id} icon={<MdDeleteOutline />}>Remove</DropdownItem>
+                            </DropdownMenu>
+                          }
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  )}
+              </Fragment>
+            )
+          })}
         </div>
       </div>
       <div className='bottom-right-corner lower-placeholder-div'></div>

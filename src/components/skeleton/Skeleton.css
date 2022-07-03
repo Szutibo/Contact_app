@@ -1,0 +1,18 @@
+.skeleton-one-contact {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skeleton-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #1E1E1E;
+}
+
+.skeleton-item {
+    width: 8rem;
+    height: 1rem;
+    background-color: #1E1E1E;
+    margin: 0.18rem 0 0.18rem 1rem;
+}

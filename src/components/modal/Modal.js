@@ -77,7 +77,7 @@ function Modal(props, { setImages }) {
         } else if (props.contactToUpdate.img) {
             setImageUpd(`/images/${props.contactToUpdate.img}`);
         } else {
-            setImageUpd('');
+            setImageUpd(`/images/${props.defBg}`);
         }
     }
 
