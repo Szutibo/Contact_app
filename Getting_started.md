@@ -24,7 +24,7 @@ Also you can upload pictures.
     - for frontend: go to contacts_app\src\components\fetch\Fetch.js and change the port
 
 6. That's it! You are ready to start the app by running the upcoming commands:
-    - for the backend in your terminal which is cd-d into contacts_app\api hit node inex.js
+    - for the backend in your terminal which is cd-d into contacts_app\api hit node index.js
     - for the frontend in your terminal which is cd-d into contacts_app hit npm start
 
 7. Hope you like it!
